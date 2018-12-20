@@ -16,7 +16,7 @@ df = pd.read_csv('./BI Challenge Data (1).csv')
 # print(df.dtypes)
 # for col in df:
     # print (type(df[col][1]))
-# print(df.describe())
+print(df.describe())
 
 # Understand the time span of the dataset
 # print('Min createDate:{}; Max createDate:{}'.format(min(df.createDate),max(df.createDate)))
@@ -265,7 +265,6 @@ RFMT_level_agg = RFMT_df.groupby(['RFMT_Level']).agg({
     'Tenure': 'mean',
     'MonetaryValue': ['mean', 'count']
 }).round(2)
-print("RFMT_level_agg")
 print(RFMT_level_agg)
 # print(RFMT_level_agg.mean())
 # print(RFMT_level_agg.std())
@@ -331,11 +330,10 @@ ggf = GammaGammaFitter(penalizer_coef = 0)
 ggf.fit(RFMT_df['Frequency_Count']['count'], RFMT_df['MonetaryValue_TotalProfit']['sum'])
 # print(ggf)
 expected_profit = ggf.conditional_expected_average_profit(RFMT_df['Frequency_Count']['count'],RFMT_df['MonetaryValue_TotalProfit']['sum']).round(2)
-print(expected_profit.head(10))
+# print(expected_profit.head(10))
 print("Expected conditional average profit: %s, Average profit: %s" % (ggf.conditional_expected_average_profit(RFMT_df['Frequency_Count']['count'],RFMT_df['MonetaryValue_TotalProfit']['sum']).mean().round(2),RFMT_df[RFMT_df['Frequency_Count']['count']>0]['MonetaryValue_TotalProfit']['sum'].mean().round(2)))
-
 RFMT_df = RFMT_df.assign(PLV=expected_profit)
-print(RFMT_df['PLV'])
+
 
 
 # Compute total CLV using DCF method (https://en.wikipedia.org/wiki/Discounted_cash_flow), adjusting for cost of capital
@@ -431,9 +429,8 @@ kmeans.fit(RFMT_df_log_norm)
 cluster_labels = kmeans.labels_
 
 RFMT_k4 = RFMT_df.assign(Cluster = cluster_labels)
-print(RFMT_k4)
-
-print(RFMT_k4.describe())
+# print(RFMT_k4)
+# print(RFMT_k4.describe())
 
 cluster_agg_PLV = RFMT_k4.groupby(['Cluster']).agg({
     'Recency': 'mean',
@@ -494,7 +491,7 @@ population_avg = RFMT_df.mean()
 relative_imp = cluster_avg / population_avg - 1
 print(relative_imp.round(2))
 
-plt.figure(figsize=(8, 2))
-plt.title('Relative importance of metrics')
-sns.heatmap(data=relative_imp, annot=True, fmt='.2f', cmap='RdYlGn')
-plt.show()
+#### plt.figure(figsize=(8, 2))
+#### plt.title('Relative importance of metrics')
+#### sns.heatmap(data=relative_imp, annot=True, fmt='.2f', cmap='RdYlGn')
+# plt.show()
