@@ -9,7 +9,7 @@ Steps taken:
 
 - Time-based cohort analysis
 
-- RFMT Analysis (Recency, Frequency, MonetaryValue, Tenure)
+- RFMT Analysis (Recency, Frequency, Monetary Value, Tenure)
 
 - Customer Lifetime Value Analysis (CLV)
 
