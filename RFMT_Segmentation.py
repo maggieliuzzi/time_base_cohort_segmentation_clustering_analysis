@@ -10,20 +10,19 @@ from matplotlib import pyplot as plt
 
 
 df = pd.read_csv('./BI Challenge Data (1).csv')
-print(df.head())
-print(df.tail())
+# print(df.head())
+# print(df.tail())
 # print(df.info())
 # print(df.dtypes)
 # for col in df:
     # print (type(df[col][1]))
-print(df.describe())
+# print(df.describe())
 
 # Understand the time span of the dataset
-print('Min createDate:{}; Max createDate:{}'.format(min(df.createDate),
-                              max(df.createDate)))
+# print('Min createDate:{}; Max createDate:{}'.format(min(df.createDate),max(df.createDate)))
 
 # Understand how many posters created completed tasks in this period
-print(df['posterID'].nunique())
+# print(df['posterID'].nunique())
 
 
 
@@ -99,10 +98,11 @@ user_retention_abs = cohorts['Total Cohort Posters in Period'].unstack(0)
 
 ''' Plotting and analysing cohort behaviour '''
 
-width, height = plt.figaspect(4)
-fig = plt.figure(figsize=(width, height), dpi=400)
+#### width, height = plt.figaspect(4)
+#### fig = plt.figure(figsize=(width, height), dpi=400)
 from matplotlib import rcParams
 
+''' ####
 plt.style.use('fivethirtyeight')
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = 'DejaVu Sans'
@@ -116,46 +116,49 @@ plt.rcParams['ytick.labelsize'] = 6
 plt.rcParams['legend.fontsize'] = 10
 plt.rcParams['figure.titlesize'] = 12
 # plt.show()
+'''
 
 # 1
-width, height = plt.figaspect(.6)
-fig = plt.figure(figsize=(width, height), dpi=120)
-plt.title("Poster Cohort Analysis (abs)", fontname='Ubuntu', fontsize=14, fontweight='bold')
-sns.heatmap(user_retention_abs.T, mask=user_retention.T.isnull(), annot=True, fmt='g', cmap='coolwarm')
+#### width, height = plt.figaspect(.6)
+#### fig = plt.figure(figsize=(width, height), dpi=120)
+#### plt.title("Poster Cohort Analysis (abs)", fontname='Ubuntu', fontsize=14, fontweight='bold')
+#### sns.heatmap(user_retention_abs.T, mask=user_retention.T.isnull(), annot=True, fmt='g', cmap='coolwarm')
 # plt.show()
 
 # 2
-width, height = plt.figaspect(.6)
-fig = plt.figure(dpi=120)
-plt.title("Churn Analysis", fontname='Ubuntu', fontsize=14, fontweight='bold')
-sns.heatmap(user_retention.T, mask=user_retention.T.isnull(), annot=True, fmt='0.00%', cmap='viridis')
+#### width, height = plt.figaspect(.6)
+#### fig = plt.figure(dpi=120)
+#### plt.title("Churn Analysis", fontname='Ubuntu', fontsize=14, fontweight='bold')
+#### sns.heatmap(user_retention.T, mask=user_retention.T.isnull(), annot=True, fmt='0.00%', cmap='viridis')
 # plt.show()
 
 # 3
-width, height = plt.figaspect(.6)
-fig = plt.figure(dpi=150)
+#### width, height = plt.figaspect(.6)
+#### fig = plt.figure(dpi=150)
 
-ax = user_retention[['2013-06', '2013-07', '2013-08', '2013-09', '2013-10', '2013-11', '2013-12',
+'''
+#### ax = user_retention[['2013-06', '2013-07', '2013-08', '2013-09', '2013-10', '2013-11', '2013-12',
                      '2014-01','2014-02','2014-03','2014-04','2014-05','2014-06','2014-07','2014-08','2014-09','2014-10','2014-11','2014-12',
                      '2015-01','2015-02','2015-03','2015-04','2015-05','2015-06','2015-07','2015-08','2015-09','2015-10','2015-11','2015-12',
                      '2016-01','2016-02','2016-03','2016-04','2016-05','2016-06','2016-07','2016-08','2016-09','2016-10','2016-11']].plot(figsize=(11, 6))
-plt.title("Retention rate (%) per CohortGroup", fontname='Ubuntu', fontsize=20, fontweight='bold')
+'''
+#### plt.title("Retention rate (%) per CohortGroup", fontname='Ubuntu', fontsize=20, fontweight='bold')
 
-plt.xticks(np.arange(1, 16.1, 1))
-plt.yticks(np.arange(0, 1.1, 0.1))
-ax.set_xlabel("CohortPeriod", fontsize=10)
-ax.set_ylabel("Retention(%)", fontsize=10)
-plt.savefig("cohort_retention.png")
+#### plt.xticks(np.arange(1, 16.1, 1))
+#### plt.yticks(np.arange(0, 1.1, 0.1))
+#### ax.set_xlabel("CohortPeriod", fontsize=10)
+#### ax.set_ylabel("Retention(%)", fontsize=10)
+#### plt.savefig("cohort_retention.png")
 # plt.show()
 
 # 4
-ax = user_retention.T.mean().plot(figsize=(11, 6), marker=',')
-plt.title("Retention rate (%) per CohortGroup", fontname='Ubuntu', fontsize=6, fontweight='bold')
+#### ax = user_retention.T.mean().plot(figsize=(11, 6), marker=',')
+#### plt.title("Retention rate (%) per CohortGroup", fontname='Ubuntu', fontsize=6, fontweight='bold')
 
-plt.xticks(np.arange(1, 42.1, 1), fontsize=4)
-plt.yticks(np.arange(0, 1.1, 0.1), fontsize=4)
-ax.set_xlabel("CohortPeriod", fontsize=4)
-ax.set_ylabel("Retention(%)", fontsize=4)
+#### plt.xticks(np.arange(1, 42.1, 1), fontsize=4)
+#### plt.yticks(np.arange(0, 1.1, 0.1), fontsize=4)
+#### ax.set_xlabel("CohortPeriod", fontsize=4)
+#### ax.set_ylabel("Retention(%)", fontsize=4)
 # plt.show()
 
 
@@ -196,8 +199,8 @@ RFMT_df = df.groupby(['posterID']).agg({
     'Recency_Months': {'Recency_Months': 'min', 'Tenure_Months': 'max'},
     'assignedPrice': 'sum'})
 
-# Eg. Profit: 5% commission per dollar paid by poster
-RFMT_df['assignedPrice'] = RFMT_df['assignedPrice']*0.05
+# Eg. Profit: 15% commission per dollar paid by poster
+RFMT_df['assignedPrice'] = RFMT_df['assignedPrice']*0.15
 
 # Rename the columns
 RFMT_df.rename(columns={'createDate': 'Frequency_Count', # Over period: 2013-06 - 2016-11
@@ -233,18 +236,18 @@ print('Min RFMT_Score:{}; Max RFMT_Score:{}'.format(min(RFMT_df['RFMT_Score']),
                               max(RFMT_df['RFMT_Score'])))
 
 RFMT_groupByScore = RFMT_df.groupby('RFMT_Score').mean()
-# print(RFMT_groupByScore)
+print(RFMT_groupByScore)
 
 
 
 def rfmt_level(df):
-    if df >= 10: # df = df[RMFT_Score]
+    if df >= 11: # df = df[RMFT_Score] # [11,12,13,14,15]
         return 'Gold'
-    elif (df >= 8) and (df < 10):
+    elif (df >= 9) and (df < 11): # [9,10]
         return 'Silver'
-    elif (df >= 6) and (df < 8):
+    elif (df >= 8) and (df < 9): # [8]
         return 'Bronze'
-    else:
+    else: # [6,7]
         return 'Basic'
 
 RFMT_df['RFMT_Level'] = RFMT_df['RFMT_Score'].apply(rfmt_level)
@@ -261,7 +264,8 @@ RFMT_level_agg = RFMT_df.groupby(['RFMT_Level']).agg({
     # Return the size of each segment
     'Tenure': 'mean',
     'MonetaryValue': ['mean', 'count']
-})
+}).round(2)
+print("RFMT_level_agg")
 print(RFMT_level_agg)
 # print(RFMT_level_agg.mean())
 # print(RFMT_level_agg.std())
@@ -279,12 +283,12 @@ bgf.fit(RFMT_df['Frequency_Count']['count'], RFMT_df['Recency_Months']['Recency_
 
 # Compute number of completed tasks posters are expected to create in the next time period, given their recency and frequency
 from lifetimes.plotting import plot_frequency_recency_matrix
-plot_frequency_recency_matrix(bgf)
+#### plot_frequency_recency_matrix(bgf)
 # plt.show()
 
 # Compute probability of posters being active in the next time period
 from lifetimes.plotting import plot_probability_alive_matrix
-plot_probability_alive_matrix(bgf)
+#### plot_probability_alive_matrix(bgf)
 # plt.show()
 
 # Compute number of completed tasks a poster is expected to create in the next period, given their frequency, recency and tenure
@@ -294,7 +298,7 @@ print(RFMT_df.sort_values(by='Predicted_Completed_Tasks').round(2))
 
 # Assess model fitness
 from lifetimes.plotting import plot_period_transactions
-plot_period_transactions(bgf)
+#### plot_period_transactions(bgf)
 # plt.show()
 
 # This library can also be used to calculate frequency, recency and tenure directly from the original df
@@ -326,8 +330,12 @@ from lifetimes import GammaGammaFitter
 ggf = GammaGammaFitter(penalizer_coef = 0)
 ggf.fit(RFMT_df['Frequency_Count']['count'], RFMT_df['MonetaryValue_TotalProfit']['sum'])
 # print(ggf)
-print(ggf.conditional_expected_average_profit(RFMT_df['Frequency_Count']['count'],RFMT_df['MonetaryValue_TotalProfit']['sum']).round(2).head(10))
+expected_profit = ggf.conditional_expected_average_profit(RFMT_df['Frequency_Count']['count'],RFMT_df['MonetaryValue_TotalProfit']['sum']).round(2)
+print(expected_profit.head(10))
 print("Expected conditional average profit: %s, Average profit: %s" % (ggf.conditional_expected_average_profit(RFMT_df['Frequency_Count']['count'],RFMT_df['MonetaryValue_TotalProfit']['sum']).mean().round(2),RFMT_df[RFMT_df['Frequency_Count']['count']>0]['MonetaryValue_TotalProfit']['sum'].mean().round(2)))
+
+RFMT_df = RFMT_df.assign(PLV=expected_profit)
+print(RFMT_df['PLV'])
 
 
 # Compute total CLV using DCF method (https://en.wikipedia.org/wiki/Discounted_cash_flow), adjusting for cost of capital
@@ -349,11 +357,11 @@ print(ggf.customer_lifetime_value(bgf, RFMT_df['Frequency_Count']['count'],RFMT_
 
 print(RFMT_df.describe().round(2))
 
-f, axes = plt.subplots(3, 1, sharex=True, sharey=True)
+#### f, axes = plt.subplots(3, 1, sharex=True, sharey=True)
 # Plot histogram with bin size determined automatically
-sns.distplot(RFMT_df['Recency'], ax=axes[0])
-sns.distplot(RFMT_df['Frequency'], ax=axes[1])
-sns.distplot(RFMT_df['MonetaryValue'], ax=axes[2])
+#### sns.distplot(RFMT_df['Recency'], ax=axes[0])
+#### sns.distplot(RFMT_df['Frequency'], ax=axes[1])
+#### sns.distplot(RFMT_df['MonetaryValue'], ax=axes[2])
 # plt.show()
 
 RFMT_df = RFMT_df.drop(['Recency_Months', 'Frequency_Count', 'MonetaryValue_TotalProfit'], axis=1)
@@ -365,10 +373,10 @@ RFMT_df_log = pd.DataFrame(np.log(RFMT_df['Recency']))
 RFMT_df_log = RFMT_df_log.assign(Frequency = np.log(RFMT_df['Frequency']))
 RFMT_df_log = RFMT_df_log.assign(MonetaryValue = np.log(RFMT_df['MonetaryValue']))
 
-f, axes = plt.subplots(3, 1, sharex=True, sharey=True)
-sns.distplot(RFMT_df_log['Recency'], ax=axes[0])
-sns.distplot(RFMT_df_log['Frequency'], ax=axes[1])
-sns.distplot(RFMT_df_log['MonetaryValue'], ax=axes[2])
+#### f, axes = plt.subplots(3, 1, sharex=True, sharey=True)
+#### sns.distplot(RFMT_df_log['Recency'], ax=axes[0])
+#### sns.distplot(RFMT_df_log['Frequency'], ax=axes[1])
+#### sns.distplot(RFMT_df_log['MonetaryValue'], ax=axes[2])
 # plt.show()
 
 
@@ -392,16 +400,6 @@ print(RFMT_df_log_norm.describe().round(2))
 ''' K-Means Clustering (Unsupervised Learning) '''
 
 from sklearn.cluster import KMeans
-kmeans = KMeans(n_clusters=4, random_state=1)
-
-kmeans.fit(RFMT_df_log_norm)
-# Extract cluster labels from labels_ attribute and store them as cluster_labels object.
-cluster_labels = kmeans.labels_
-
-RFMT_k4 = RFMT_df.assign(Cluster = cluster_labels)
-
-
-
 
 ## Choose number of clusters
 
@@ -419,9 +417,37 @@ for k in range(1, 11):
     # Assign sum of squared distances to closest cluster center to k element of sse dictionary
     sse[k] = kmeans.inertia_
 # Plot the sum of squared errors for each value of k and identify if there is an elbow
-plt.title('The Elbow Method')
-plt.xlabel('k'); plt.ylabel('SSE')
-sns.pointplot(x=list(sse.keys()), y=list(sse.values()))
+#### plt.title('The Elbow Method')
+#### plt.xlabel('k'); plt.ylabel('SSE')
+#### sns.pointplot(x=list(sse.keys()), y=list(sse.values()))
+# plt.show()
+
+
+
+kmeans = KMeans(n_clusters=4, random_state=1)
+
+kmeans.fit(RFMT_df_log_norm)
+# Extract cluster labels from labels_ attribute and store them as cluster_labels object.
+cluster_labels = kmeans.labels_
+
+RFMT_k4 = RFMT_df.assign(Cluster = cluster_labels)
+print(RFMT_k4)
+
+print(RFMT_k4.describe())
+
+cluster_agg_PLV = RFMT_k4.groupby(['Cluster']).agg({
+    'Recency': 'mean',
+    'Frequency': 'mean',
+    # Return the size of each segment
+    'Tenure': 'mean',
+    'MonetaryValue': ['mean', 'count'],
+    'PLV': 'mean'
+}).reset_index().round(2)
+print(cluster_agg_PLV)
+
+#### plt.plot(cluster_agg_PLV['Cluster'],cluster_agg_PLV['PLV'],'bo')
+#### plt.xlabel('Cluster')
+#### plt.ylabel('PLV')
 # plt.show()
 
 
@@ -445,16 +471,16 @@ RFMT_df_log_norm['Cluster'] = RFMT_k4['Cluster']
 # Transform the normalised RFMT data into a long format by "melting" the metric columns into two columns - one for name of metric and one for actual numeric value
 df_melt = pd.melt(RFMT_df_log_norm.reset_index(),
                     id_vars=['posterID', 'Cluster'],
-                    value_vars=['Recency', 'Frequency', 'MonetaryValue'],
+                    value_vars=['Recency', 'Frequency', 'MonetaryValue', 'Tenure', 'PLV'],
                     var_name='Metric', # or 'Attribute'
                     value_name='Value')
 print(df_melt.head())
 print(df_melt.tail())
 
-plt.title('Snake plot of standardised/normalised variables')
-plt.xlabel('Metric')
-plt.ylabel('Value')
-sns.lineplot(data=df_melt, x="Metric", y="Value", hue='Cluster')
+#### plt.title('Snake plot of standardised/normalised variables')
+#### plt.xlabel('Metric')
+#### plt.ylabel('Value')
+#### sns.lineplot(data=df_melt, x="Metric", y="Value", hue='Cluster')
 # plt.show()
 
 
@@ -464,10 +490,11 @@ sns.lineplot(data=df_melt, x="Metric", y="Value", hue='Cluster')
 # The further a ratio is from 0, the more important that attribute is for a segment relative to the total population
 cluster_avg = RFMT_k4.groupby(['Cluster']).mean()
 population_avg = RFMT_df.mean()
+
 relative_imp = cluster_avg / population_avg - 1
 print(relative_imp.round(2))
 
 plt.figure(figsize=(8, 2))
 plt.title('Relative importance of metrics')
 sns.heatmap(data=relative_imp, annot=True, fmt='.2f', cmap='RdYlGn')
-# plt.show()
+plt.show()
